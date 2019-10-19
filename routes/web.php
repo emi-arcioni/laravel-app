@@ -11,6 +11,30 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'HomeController@show');
+
+// -- LOGIN --
+Route::get('/login', [
+    'as' => 'login',
+    'uses' => 'Auth\LoginController@showLoginForm'
+]);
+Route::post('/login', 'Auth\LoginController@login');
+// --
+
+// -- LOGOUT --
+Route::get('/logout', 'Auth\LoginController@logout');
+// --
+
+// -- SIGN IN --
+Route::get('/signin', 'Auth\RegisterController@showRegistrationForm');
+Route::post('/signin', 'Auth\RegisterController@register');
+// --
+
+Route::get('/users/{user_id}/entries', 'EntryController@index');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/users/{user_id}/entries/create', 'EntryController@create');
+    Route::get('/users/{user_id}/entries/{entry_id}/edit', 'EntryController@edit');
+    Route::post('/users/{user_id}/entries', 'EntryController@store');
+    Route::put('/users/{user_id}/entries/{entry_id}', 'EntryController@update');
+    Route::delete('/users/{user_id}/entries/{entry_id}', 'EntryController@destroy');
 });
