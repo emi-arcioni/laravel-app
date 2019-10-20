@@ -21,4 +21,4 @@ Route::group(['middleware' => ['auth']], function () {
     
 });
 
-Route::get('/tweets/{user_id}', 'TwitterController@showTweets');
+Route::get('/tweets/{user_id}', 'TwitterController@getTweets');
