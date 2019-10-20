@@ -18,3 +18,8 @@ $('[data-remove-entry]').click(function() {
         }
     });
 });
+
+$('[data-hide-tweet-btn]').click(function() {
+    let tweet_id = $(this).data('id');
+    console.log(tweet_id);
+});

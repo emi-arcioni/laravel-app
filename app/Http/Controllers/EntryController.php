@@ -6,9 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Entry;
 use App\User;
+use App\Http\Controllers\TwitterController;
 
 class EntryController extends Controller
 {
+    protected $twitterController;
+
+    public function __construct(TwitterController $twitterController) {
+        $this->twitterController = $twitterController;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,11 +24,13 @@ class EntryController extends Controller
     {
         $entries = Entry::where('user_id', $user_id)->get();
         $user = User::where('id', $user_id)->firstOrFail();
+        $tweets = $this->twitterController->getTweets($user->twitter_username);
 
         return view('entries.list', [
             'user' => $user,
             'loggedUser' => $this->getUser(),
-            'entries' => $entries
+            'entries' => $entries,
+            'tweets' => $tweets
         ]);
     }
 
