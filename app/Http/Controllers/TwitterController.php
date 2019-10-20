@@ -13,8 +13,18 @@ class TwitterController extends Controller
         try {
             $token = $this->loadToken();
         } catch (EnvironmentVariableNotFoundException $e) {
+            $response = [
+                "errors" => [
+                    [
+                        'message' => $e->getMessage(),
+                        'label' => 'env_variable_error'
+                    ]
+                ]
+            ];
+            return $response;
+        } catch (GuzzleHttp\Exception\ClientException $e) {
             $response = $e->getResponse();
-            return json_decode($response->getBody());
+            return json_decode($response->getBody(), true);
         }
 
         $client = new GuzzleHttp\Client();
@@ -28,7 +38,7 @@ class TwitterController extends Controller
             $response = $e->getResponse();
         }
 
-        return json_decode($response->getBody());
+        return json_decode($response->getBody(), true);
     }
 
     private function loadToken() {
