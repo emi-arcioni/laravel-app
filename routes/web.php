@@ -26,12 +26,17 @@ Route::get('/logout', 'Auth\LoginController@logout');
 // --
 
 // -- SIGN IN --
-Route::get('/signin', 'Auth\RegisterController@showRegistrationForm');
-Route::post('/signin', 'Auth\RegisterController@register');
+Route::group(['middleware' => ['guest']], function () {
+    Route::get('/signin', 'Auth\RegisterController@showRegistrationForm');
+    Route::post('/signin', 'Auth\RegisterController@register');
+});
 // --
 
 Route::get('/users/{user_id}/entries', 'EntryController@index');
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('/users/{user_id}/edit', 'Auth\RegisterController@edit');
+    Route::put('/users/{user_id}', 'Auth\RegisterController@update');
+
     Route::get('/users/{user_id}/entries/create', 'EntryController@create');
     Route::get('/users/{user_id}/entries/{entry_id}/edit', 'EntryController@edit');
     Route::post('/users/{user_id}/entries', 'EntryController@store');

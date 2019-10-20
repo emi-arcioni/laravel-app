@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
@@ -29,6 +31,13 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/';
+    
+    /**
+     * Where to redirect users after registration.
+     *
+     * @var string
+     */
+    protected $registrationForm = 'auth.register';
 
     /**
      * Create a new controller instance.
@@ -37,7 +46,20 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        // $this->middleware('guest');
+
+    }
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        return view($this->registrationForm, [
+            'user' => null
+        ]);
     }
 
     /**
@@ -72,5 +94,57 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'twitter_username' => $data['twitter_username']
         ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($user_id)
+    {
+        // TODO: maybe this could be resolved using a middleware
+        $loggedUser = $this->getUser();
+        if ($loggedUser->id != $user_id) return redirect('/');
+
+        return view($this->registrationForm, [
+            'user' => $this->getUser()
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $user_id)
+    {
+        // TODO: maybe this could be resolved using a middleware
+        $loggedUser = $this->getUser();
+        if ($loggedUser->id != $user_id) return redirect('/');
+        
+
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($loggedUser->id)],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($loggedUser->id)],
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'twitter_username' => ['string', 'max:255']
+        ]);
+
+
+        $loggedUser->name = $request['name'];
+        $loggedUser->username = $request['username'];
+        $loggedUser->email = $request['email'];
+        $loggedUser->twitter_username = $request['twitter_username'];
+        if ($request['password']) {
+            $loggedUser->password = Hash::make($request['password']);
+        }
+        $loggedUser->save();
+
+        return redirect('/');
     }
 }

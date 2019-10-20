@@ -26,7 +26,7 @@
                     </li>
                     <li class="nav-item mr-3">
                         <span class="navbar-text text-light">
-                            Welcome {{ $user['name'] }}
+                            Welcome <a href="{{ url('/users/' . $user['id'] . '/edit') }}">{{ $user['name'] }}</a>
                         </span>
                     </li>
                     <li class="nav-item">

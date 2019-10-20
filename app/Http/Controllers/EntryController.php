@@ -41,6 +41,7 @@ class EntryController extends Controller
      */
     public function create($user_id)
     {
+        // TODO: maybe this could be resolved using a middleware
         $loggedUser = $this->getUser();
         if ($loggedUser->id != $user_id) return redirect('/');
 
@@ -91,6 +92,7 @@ class EntryController extends Controller
      */
     public function edit($user_id, $entry_id)
     {
+        // TODO: maybe this could be resolved using a middleware
         $loggedUser = $this->getUser();
         if ($loggedUser->id != $user_id) return redirect('/');
 
@@ -110,6 +112,7 @@ class EntryController extends Controller
      */
     public function update(Request $request, $user_id, $entry_id)
     {
+        // TODO: maybe this could be resolved using a middleware
         $loggedUser = $this->getUser();
         if ($loggedUser->id != $user_id) return redirect('/');
 
@@ -134,6 +137,7 @@ class EntryController extends Controller
      */
     public function destroy($user_id, $entry_id)
     {
+        // TODO: maybe this could be resolved using a middleware
         $loggedUser = $this->getUser();
         if ($loggedUser->id != $user_id) return redirect('/');
         
