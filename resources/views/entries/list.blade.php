@@ -29,15 +29,15 @@
                     @else
                         @foreach($tweets as $tweet)
                             <div class="card mb-3">
-                                @if (!empty($tweet->entities->media))
-                                    <img src="{{ $tweet->entities->media[0]->media_url }}" class="card-img-top" alt="...">
+                                @if (!empty($tweet['entities']['media']))
+                                    <img src="{{ $tweet['entities']['media'][0]['media_url'] }}" class="card-img-top" alt="...">
                                 @endif
                                 <div class="card-body">
-                                    <h6 class="card-subtitle mb-2 text-muted">{{ $tweet->created_at }}</h6>
-                                    <p class="card-text">{{ $tweet->text }}</p>
-                                    <p><a href="https://twitter.com/{{ $user->twitter_username }}/status/{{ $tweet->id }}" class="card-link" target="_blank">View in twitter.com</a></p>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{ $tweet['created_at'] }}</h6>
+                                    <p class="card-text">{{ $tweet['text'] }}</p>
+                                    <p><a href="https://twitter.com/{{ $user->twitter_username }}/status/{{ $tweet['id'] }}" class="card-link" target="_blank">View in twitter.com</a></p>
                                     @if ($loggedUser && $loggedUser->id == $user->id)
-                                        <button class="btn btn-primary" data-hide-tweet-btn data-id="{{ $tweet->id }}">Hide</button>
+                                        <button class="btn btn-primary" data-hide-tweet-btn data-id="{{ $tweet['id'] }}">Hide</button>
                                     @endif
                                 </div>
                             </div>
