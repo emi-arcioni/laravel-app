@@ -1,0 +1,16 @@
+.card {
+    .unhide-btn {
+        display: none;
+    }
+    &.hidden {
+        img, .card-body {
+            opacity: .3;
+        }
+        .unhide-btn {
+            display: inline-block;
+        }
+        .hide-btn {
+            display: none;
+        }
+    }
+}

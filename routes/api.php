@@ -17,8 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => ['auth']], function () {
-    
+Route::group(['middleware' => ['auth:api']], function () {
+    Route::post('/users/{user_id}/tweets/{tweet_id}/hide', 'TwitterController@hideTweet');
+    Route::delete('/users/{user_id}/tweets/{tweet_id}/hide', 'TwitterController@unhideTweet');
 });
 
-Route::get('/tweets/{user_id}', 'TwitterController@getTweets');
+Route::get('/users/{user_id}/tweets', 'TwitterController@getTweets');

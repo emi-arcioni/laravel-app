@@ -28,18 +28,22 @@
                         @endforeach
                     @else
                         @foreach($tweets as $tweet)
-                            <div class="card mb-3">
-                                @if (!empty($tweet['entities']['media']))
-                                    <img src="{{ $tweet['entities']['media'][0]['media_url'] }}" class="card-img-top" alt="...">
+                            <div class="card mb-3 {{ $tweet->hidden ? 'hidden' : '' }}">
+                                @if (!empty($tweet->entities->media))
+                                    <img src="{{ $tweet->entities->media[0]->media_url }}" class="card-img-top">
                                 @endif
                                 <div class="card-body">
-                                    <h6 class="card-subtitle mb-2 text-muted">{{ $tweet['created_at'] }}</h6>
-                                    <p class="card-text">{{ $tweet['text'] }}</p>
-                                    <p><a href="https://twitter.com/{{ $user->twitter_username }}/status/{{ $tweet['id'] }}" class="card-link" target="_blank">View in twitter.com</a></p>
-                                    @if ($loggedUser && $loggedUser->id == $user->id)
-                                        <button class="btn btn-primary" data-hide-tweet-btn data-id="{{ $tweet['id'] }}">Hide</button>
-                                    @endif
+                                    <h6 class="card-subtitle mb-2 text-muted">{{ $tweet->created_at }}</h6>
+                                    <p class="card-text">{{ $tweet->text }}</p>
+                                    <a href="https://twitter.com/{{ $user->twitter_username }}/status/{{ $tweet->id }}" class="card-link" target="_blank">View in twitter.com</a>
                                 </div>
+                                @if ($loggedUser && $loggedUser->id == $user->id)
+                                    <div class="card-footer">
+                                        <button class="btn btn-primary hide-btn" data-hide-tweet-btn data-token="{{ $user->api_token }}" data-action="POST" data-url="{{ url('/api/users/' . $user->id . '/tweets/' . $tweet->id . '/hide') }}">Hide</button>
+
+                                        <button class="btn btn-primary unhide-btn" data-hide-tweet-btn data-token="{{ $user->api_token }}" data-action="DELETE" data-url="{{ url('/api/users/' . $user->id . '/tweets/' . $tweet->id . '/hide') }}">Unhide</button>
+                                    </div>
+                                @endif
                             </div>
                         @endforeach
                     @endif

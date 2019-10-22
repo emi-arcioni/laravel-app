@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -92,7 +93,8 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'twitter_username' => $data['twitter_username']
+            'twitter_username' => $data['twitter_username'],
+            'api_token' => Str::random(60)
         ]);
     }
 
@@ -104,7 +106,7 @@ class RegisterController extends Controller
      */
     public function edit($user_id)
     {
-        // TODO: maybe this could be resolved using a middleware
+        // TODO: maybe this could be resolved using a GATE
         $loggedUser = $this->getUser();
         if ($loggedUser->id != $user_id) return redirect('/');
 
@@ -122,7 +124,7 @@ class RegisterController extends Controller
      */
     public function update(Request $request, $user_id)
     {
-        // TODO: maybe this could be resolved using a middleware
+        // TODO: maybe this could be resolved using a GATE
         $loggedUser = $this->getUser();
         if ($loggedUser->id != $user_id) return redirect('/');
         

@@ -14,12 +14,29 @@ $('[data-remove-entry]').click(function() {
         type: 'DELETE',
         success: function(result) {
             tr.remove();
-            // Do something with the result
         }
     });
 });
 
 $('[data-hide-tweet-btn]').click(function() {
-    let tweet_id = $(this).data('id');
-    console.log(tweet_id);
+    let url = $(this).data("url");
+    let token = $(this).data('token');
+    let action = $(this).data('action');
+
+    let card = $(this).closest('.card');
+
+    $.ajax({
+        url: url,
+        data: {
+            api_token: token
+        },
+        type: action,
+        success: function(result) {
+            if (action == 'POST') {
+                card.addClass('hidden');
+            } else if (action == 'DELETE') {
+                card.removeClass('hidden');
+            }
+        }
+    });
 });
