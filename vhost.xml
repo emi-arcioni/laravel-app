@@ -1,0 +1,4 @@
+<VirtualHost *:80>
+    ServerName emilio-arcioni.jobsitychallenge.com
+    DocumentRoot "/Users/emilio/Sites/laravel-app/public"
+</VirtualHost>
