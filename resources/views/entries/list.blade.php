@@ -4,14 +4,9 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12 mt-3">
-            <h1 class="h2 font-weight-normal">User {{ $user->username }}</h1>
-        </div>
+    <div class="row pt-3">
         <div class="col-md-8">
-            <main>
-                <h3 class="font-weight-normal">Entries</h3>
-            
+            <main>            
                 @include('entry-table', [
                     'user_id' => $loggedUser ? $loggedUser->id : null,
                     'entries' => $entries

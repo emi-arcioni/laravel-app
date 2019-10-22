@@ -10,10 +10,10 @@
                 @if (!empty($user))
                     Update user information
                 @else
-                    Please Sign in
+                    User registration
                 @endif
             </h1>
-            <form action="{{ url(!empty($user) ? '/users/' . $user->id : '/signin') }}" method="POST" id="signInForm">
+            <form action="{{ url(!empty($user) ? '/users/' . $user->id : '/register') }}" method="POST" id="signInForm">
                 @csrf
 
                 @if (!empty($user))

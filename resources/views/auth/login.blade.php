@@ -25,7 +25,7 @@
                 <div class="form-group">
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
                 </div>
-                <p>Not a member? Please <a href="{{ url('/signin') }}">sign in</a></p>
+                <p>Not a member? Please <a href="{{ url('/register') }}">register</a></p>
             </form>
         </div>
     </form>

@@ -25,10 +25,10 @@ Route::post('/login', 'Auth\LoginController@login');
 Route::get('/logout', 'Auth\LoginController@logout');
 // --
 
-// -- SIGN IN --
+// -- REGISTER --
 Route::group(['middleware' => ['guest']], function () {
-    Route::get('/signin', 'Auth\RegisterController@showRegistrationForm');
-    Route::post('/signin', 'Auth\RegisterController@register');
+    Route::get('/register', 'Auth\RegisterController@showRegistrationForm');
+    Route::post('/register', 'Auth\RegisterController@register');
 });
 // --
 

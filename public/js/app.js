@@ -3,7 +3,7 @@ $('[data-remove-entry]').click(function() {
     
     let url = $(this).data("url");
     let token = $(this).data('token');
-    let tr = $(this).closest('tr');
+    let entry = $(this).closest('.entry');
     
 
     $.ajax({
@@ -13,7 +13,7 @@ $('[data-remove-entry]').click(function() {
         },
         type: 'DELETE',
         success: function(result) {
-            tr.remove();
+            entry.remove();
         }
     });
 });
