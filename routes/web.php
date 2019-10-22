@@ -11,7 +11,10 @@
 |
 */
 
-Route::get('/', 'HomeController@show');
+Route::get('/', [
+    'as' => '/',
+    'uses' => 'HomeController@show'
+]);
 
 // -- LOGIN --
 Route::get('/login', [

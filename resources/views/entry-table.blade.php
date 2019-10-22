@@ -12,7 +12,7 @@
                     </div>
                 @endif
             @endauth
-            <h5>{{ $entry->created_at }}</h5>
+            <h5>{{ date('m-d-Y H:i', strtotime($entry->created_at)) }}</h5>
             <h5><a href="{{ url('/users/' . $entry->user->id) . '/entries' }}">{{ $entry->user->username }}</a></h5>
         </div>
         <div class="col-md-12">
@@ -20,3 +20,7 @@
         </div>
     </div>
 @endforeach
+
+@if (!empty($paginator))
+    {{ $paginator }}
+@endif
