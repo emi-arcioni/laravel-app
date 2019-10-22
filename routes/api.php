@@ -20,6 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => ['auth:api']], function () {
     Route::post('/users/{user_id}/tweets/{tweet_id}/hide', 'TwitterController@hideTweet');
     Route::delete('/users/{user_id}/tweets/{tweet_id}/hide', 'TwitterController@unhideTweet');
+
+    Route::delete('/users/{user_id}/entries/{entry_id}', 'EntryController@destroy');
 });
 
 Route::get('/users/{user_id}/tweets', 'TwitterController@getTweets');

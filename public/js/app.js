@@ -9,7 +9,7 @@ $('[data-remove-entry]').click(function() {
     $.ajax({
         url: url,
         data: {
-            _token: token
+            api_token: token
         },
         type: 'DELETE',
         success: function(result) {

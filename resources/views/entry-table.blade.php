@@ -8,7 +8,7 @@
                 @if ($user_id == $entry->user->id)
                     <div class="btn-group mb-3">
                         <a class="btn btn-secondary" href="{{ url('/users/' . $entry->user->id . '/entries/' . $entry->id . '/edit') }}">Edit</a>
-                        <a class="btn btn-secondary" href="javascript:;" data-remove-entry data-url="{{ url('/users/' . $entry->user->id . '/entries/' . $entry->id) }}" data-token="{{ csrf_token() }}">Remove</a>
+                        <a class="btn btn-secondary" href="javascript:;" data-remove-entry data-url="{{ url('/api/users/' . $entry->user->id . '/entries/' . $entry->id) }}" data-token="{{ $entry->user->api_token }}">Remove</a>
                     </div>
                 @endif
             @endauth

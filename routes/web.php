@@ -44,7 +44,4 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/users/{user_id}/entries/{entry_id}/edit', 'EntryController@edit');
     Route::post('/users/{user_id}/entries', 'EntryController@store');
     Route::put('/users/{user_id}/entries/{entry_id}', 'EntryController@update');
-
-    // TODO: move this endpoint to de API endpoints
-    Route::delete('/users/{user_id}/entries/{entry_id}', 'EntryController@destroy');
 });
