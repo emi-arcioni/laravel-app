@@ -8,7 +8,7 @@
         <div class="col-md-6 offset-md-3">
             <h1 class="h3 mb-3 font-weight-normal">
                 @if (!empty($user))
-                    Update user information
+                    Edit user information
                 @else
                     User registration
                 @endif

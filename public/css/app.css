@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);.card .unhide-btn{display:none}.card.hidden .card-body,.card.hidden img{opacity:.3}.card.hidden .unhide-btn{display:inline-block}.card.hidden .hide-btn{display:none}
+@import url(https://fonts.googleapis.com/css?family=Nunito);body{padding-top:50px}.card .unhide-btn{display:none}.card.hidden .card-body,.card.hidden img{opacity:.3}.card.hidden .unhide-btn{display:inline-block}.card.hidden .hide-btn{display:none}
 
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)

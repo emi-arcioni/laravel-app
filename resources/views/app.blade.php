@@ -11,8 +11,7 @@
         <title>My Laravel App - @yield('title')</title>
     </head>
     <body>
-  
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
             <a class="navbar-brand" href="{{ url('/') }}">My Laravel App</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -26,8 +25,11 @@
                     </li>
                     <li class="nav-item mr-3">
                         <span class="navbar-text text-light">
-                            Welcome <a href="{{ url('/users/' . $user['id'] . '/edit') }}">{{ $user['name'] }}</a>
+                            Welcome <a href="{{ url('/users/' . $user['id'] . '/entries') }}">{{ $user['name'] }}</a>
                         </span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/users/' . $user['id'] . '/edit') }}">Edit user</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/logout') }}">Logout</a>
