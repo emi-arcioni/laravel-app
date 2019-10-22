@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     //
 
-    public function show($page_number = 1) {
+    public function show() {
         $user_count = [];
         $items = [];
         $all_entries = Entry::orderBy('created_at', 'desc')->get();

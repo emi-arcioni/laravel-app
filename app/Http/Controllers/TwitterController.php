@@ -58,7 +58,7 @@ class TwitterController extends Controller
         return array_values($tweets);
     }
 
-    private function loadToken() {
+    public function loadToken() {
         
         if (!$key = env('TWITTER_API_KEY')) {
             throw new EnvironmentVariableNotFoundException('The environment variable TWITTER_API_KEY is missing or empty');
