@@ -17,9 +17,9 @@
             <div class="col-md-3">
                 <aside>
                     <h3 class="font-weight-normal">Tweets ({{ $user->twitter_username }})</h3> 
-                    @if (!empty($tweets->errors))
-                        @foreach ($tweets->errors as $error)
-                            <div class="alert alert-info">{{ $error->message }}</div>
+                    @if (!empty($tweets['errors']))
+                        @foreach ($tweets['errors'] as $error)
+                            <div class="alert alert-info">{{ $error['message'] }}</div>
                         @endforeach
                     @else
                         @foreach($tweets as $tweet)
