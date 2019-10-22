@@ -19,7 +19,8 @@ class CheckUrlUser
 
         $params = $request->route()->parameters();
         $loggedUser = Auth::user();
-        if (!empty($params['user_id'])) {
+
+        if (!empty($params['user_id']) && !empty($loggedUser)) {
             if ($params['user_id'] != $loggedUser->id){
                 if ($source == 'web') {
                     return redirect('/');
