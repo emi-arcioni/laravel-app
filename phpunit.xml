@@ -24,6 +24,8 @@
     </filter>
     <php>
         <server name="APP_ENV" value="testing"/>
+        <server name="TWITTER_API_KEY" value="uTKi3Kqt21COBsQ1Q3XqzyLAn"/>
+        <server name="TWITTER_API_SECRET" value="mMkxWWKzKAQkmSCs10uhqz7tYNCUT4ijWAHggylvqFwJmHN9TF"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
         <server name="CACHE_DRIVER" value="array"/>
         <server name="MAIL_DRIVER" value="array"/>
