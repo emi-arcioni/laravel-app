@@ -106,10 +106,6 @@ class RegisterController extends Controller
      */
     public function edit($user_id)
     {
-        // TODO: maybe this could be resolved using a GATE
-        $loggedUser = $this->getUser();
-        if ($loggedUser->id != $user_id) return redirect('/');
-
         return view($this->registrationForm, [
             'user' => $this->getUser()
         ]);
@@ -123,11 +119,7 @@ class RegisterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $user_id)
-    {
-        // TODO: maybe this could be resolved using a GATE
-        $loggedUser = $this->getUser();
-        if ($loggedUser->id != $user_id) return redirect('/');
-        
+    {     
 
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],

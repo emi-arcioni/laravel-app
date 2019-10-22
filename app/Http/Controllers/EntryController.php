@@ -41,10 +41,6 @@ class EntryController extends Controller
      */
     public function create($user_id)
     {
-        // TODO: maybe this could be resolved using a GATE
-        $loggedUser = $this->getUser();
-        if ($loggedUser->id != $user_id) return redirect('/');
-
         return view('entries.form', [
             'user' => $this->getUser(),
             'entry' => null
@@ -92,10 +88,6 @@ class EntryController extends Controller
      */
     public function edit($user_id, $entry_id)
     {
-        // TODO: maybe this could be resolved using a GATE
-        $loggedUser = $this->getUser();
-        if ($loggedUser->id != $user_id) return redirect('/');
-
         $entry = Entry::where('id', $entry_id)->firstOrFail();
         return view('entries.form', [
             'user' => $this->getUser(),
@@ -112,10 +104,6 @@ class EntryController extends Controller
      */
     public function update(Request $request, $user_id, $entry_id)
     {
-        // TODO: maybe this could be resolved using a GATE
-        $loggedUser = $this->getUser();
-        if ($loggedUser->id != $user_id) return redirect('/');
-
         $this->validate($request, [
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required']
@@ -137,10 +125,7 @@ class EntryController extends Controller
      */
     public function destroy($user_id, $entry_id)
     {
-        // TODO: maybe this could be resolved using a GATE
-        $loggedUser = $this->getUser();
-        if ($loggedUser->id != $user_id) return redirect('/');
-        
+               
         return Entry::where('id', $entry_id)->delete();
     }
 }

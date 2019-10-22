@@ -79,9 +79,7 @@ class TwitterController extends Controller
     }
 
     public function hideTweet($user_id, $tweet_id) {
-        // TODO: maybe this could be resolved using a GATE
         $loggedUser = $this->getUser();
-        if ($loggedUser->id != $user_id) return abort(403);
 
         $hidden_tweet = HiddenTweet::where('tweet_id', $tweet_id)->where('user_id', $user_id)->first();
         if (!$hidden_tweet) {
@@ -94,10 +92,7 @@ class TwitterController extends Controller
     }
     
     public function unhideTweet($user_id, $tweet_id) {
-        // TODO: maybe this could be resolved using a GATE
-        $loggedUser = $this->getUser();
-        if ($loggedUser->id != $user_id) return abort(403);
-        
+                
         HiddenTweet::where('tweet_id', $tweet_id)->where('user_id', $user_id)->delete();
         return response()->json([], 200);
     }
